@@ -1,13 +1,22 @@
 set nocompatible
 filetype off
+
+"-----------------------------------------------------------------------------
 " Pathogen: http://www.vim.org/scripts/script.php?script_id=2332
+" This needs to occur after filetype off and before filetype plugin on
+"-----------------------------------------------------------------------------
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-filetype plugin indent on
 
-"""
+" Mixed signals on this command, but it seems common enough to use
+filetype plugin indent on
+" Python stuff from
+" http://www.sontek.net/python-with-a-modular-ide-vim
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+"-----------------------------------------------------------------------------
 " Encoding and general usability
-"""
+"-----------------------------------------------------------------------------
 
 nnoremap <Space> :
 
@@ -23,30 +32,24 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 
-
-" Python stuff from
-" http://www.sontek.net/python-with-a-modular-ide-vim
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-map <buffer> <leader>p2 :w<CR>:!/usr/bin/env python % <CR>
-map <buffer> <leader>p3 :w<CR>:!/usr/bin/env python3 % <CR>
-
 " Something for latex-suite
 let g:tex_flavor='latex'
 
 set display=lastline
 
-" I don't like the menu (m) and toolbar (T).  They waste space.
-set guioptions-=m
-set guioptions-=T
-
 " Line numbering
 set number
 set relativenumber
 
+" Vim window stuff
+set linebreak
+set cursorline
 
-		""""""""""""""""""""""""""""""""""""""""""""""
-		"""""" SEARCH, HIGHLIGHT, SPELLING, ETC. """""
-		""""""""""""""""""""""""""""""""""""""""""""""
+
+"-----------------------------------------------------------------------------
+" Search, highlight, spelling, etc.
+"-----------------------------------------------------------------------------
+
 " Improved searching
 nnoremap / /\v
 vnoremap / /\v
@@ -56,54 +59,60 @@ set smartcase
 set incsearch
 syntax on
 
-" Vim window stuff
-set linebreak
-set cursorline
-
-"paragraph formatting stuff:
+" Paragraph formatting stuff:
 set formatprg=par
 
 " Store temporary files in a central location
 set backupdir=~/.vim/vim-tmp,~/.tmp,~/tmp,~/var/tmp,/tmp
 set directory=~/.vim/vim-tmp,~/.tmp,~/tmp,~/var/tmp,/tmp
 
-" hidden character stuff
-nmap <leader>s :set list!<CR>
-set listchars=tab:▸\ ,eol:¬
 
-" let me switch buffers with unsaved changes
-set hidden
+" Omnifunction
+set omnifunc=syntaxcomplete#Complete
 
-		""""""""""""""""""""""""""""""""""
-		""""" GENERIC PLUGIN BEHAVIOR """"
-		""""""""""""""""""""""""""""""""""
-set ofu=syntaxcomplete#Complete
+" If a file has been changed outside of Vim, reload it inside of Vim
 set autoread
 
-		""""""""""""""""""
-		""""" SPACING """"
-		""""""""""""""""""	
+"-----------------------------------------------------------------------------
+" Spacing
+"-----------------------------------------------------------------------------
+
 set autoindent
 set smartindent 
 set tabstop=2 shiftwidth=2 expandtab
 
-    """""""""""""""
-    """" FOLDS """"
-    """""""""""""""
+
+"-----------------------------------------------------------------------------
+" Buffers
+"-----------------------------------------------------------------------------
+
+" Delete all buffers with \da
+nmap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<cr>
+
+" Let me switch buffers with unsaved changes
+set hidden
+
+
+"-----------------------------------------------------------------------------
+" Folds
+"-----------------------------------------------------------------------------
 
 set foldcolumn=0
-set foldmethod=syntax "alternatives: indent, syntax, marker (uses `{{{` to open and `}}}` to close)
-map <leader>mv :mkview<CR>
-map <leader>lv :loadview<CR>
+set foldmethod=marker "alternatives: indent, syntax, marker
 
-""""
-" KEYMAP STUFF 
-""""
+" map <leader>mv :mkview<CR>
+" map <leader>lv :loadview<CR>
 
-" Cursor movement in word wrap stuff {{{
+"-----------------------------------------------------------------------------
+" Keymap stuff
+"-----------------------------------------------------------------------------
+
 noremap <Up> gk 
 noremap <Down> gj
+
+" Toggle text wrapping with \w {{{
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
+
 function ToggleWrap()
   if &wrap
     echo "Wrap OFF"
@@ -132,6 +141,7 @@ function ToggleWrap()
     inoremap <buffer> <silent> <End>  <C-o>g<End>
   endif
 endfunction 
+" }}}
 
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
@@ -139,24 +149,21 @@ noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 set mouse=a
 
-" keymappings for :e
+" Keymappings for :e
 map <leader>ew :e <C-R>=expand("%:p:h")."/"<CR> 
 map <leader>es :sp <C-R>=expand("%:p:h")."/"<CR>
 map <leader>ev :vsp <C-R>=expand("%:p:h")."/"<CR>
 map <leader>et :tabe <C-R>=expand("%:p:h")."/"<CR>
 
-" map for omnicomplete
+" Map for omnicomplete
 inoremap <F8> <C-X><C-O>
 
-" from http://nvie.com/posts/how-i-boosted-my-vim/
+" Access .vimrc with \vi
 nmap <silent> <leader>vi :e $MYVIMRC<CR>
 nmap <silent> <leader>vh :e ~/Documents/References/vim.txt<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" some mappings
-nmap Q gwip
-
-" Relative Number toggle (\rn)
+" Relative Number toggle (\rn) {{{
 nmap <silent> <leader>rn :call RelativeNumberToggle()<CR>
 function! RelativeNumberToggle()
   if &number
@@ -170,12 +177,43 @@ function! RelativeNumberToggle()
     endif
   endif
 endfunction
+" }}}
+
+" Display hidden characters (paragraph,eol) with \s
+nmap <leader>s :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+
+" Compile Python with \p2 or \p3
+nmap <buffer> <leader>p2 :w<CR>:!/usr/bin/env python % <CR>
+nmap <buffer> <leader>p3 :w<CR>:!/usr/bin/env python3 % <CR>
 
 
-"""
-" PLUGIN STUFF
-"""
+"-----------------------------------------------------------------------------
+" NERD Tree
+"-----------------------------------------------------------------------------
 
+" Invoke NERD Tree with \nt
 map <leader>nt :NERDTree<CR>
-let g:Tex_ViewRule_pdf = '/Applications/Skim.app'
+
+" Toggle the NERD Tree on an off with F7
+nmap <F7> :NERDTreeToggle<CR>
+
+" Close the NERD Tree with Shift-F7
+nmap <S-F7> :NERDTreeClose<CR>
+
+
+
+"-----------------------------------------------------------------------------
+" Latex-Suite (which I no longer use)
+"-----------------------------------------------------------------------------
+"let g:Tex_ViewRule_pdf = '/Applications/Skim.app'
+
+
+"-----------------------------------------------------------------------------
+" Latex-Box
+"-----------------------------------------------------------------------------
+
+" These don't work -- use \la instead, from ftplugin/tex.vim
+let g:LatexBox_viewer = 'skim'
+"let g:LatexBox_latexmk_options = '-pvc'
 

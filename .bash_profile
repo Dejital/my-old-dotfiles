@@ -18,6 +18,7 @@ alias lpdf='pdflatex'
 alias lrtf='latex2rtf'
 # Word is for opening RTF files quickly in Microsoft Word
 alias word='open -a "Microsoft Word"'
+alias skim='open -a "Skim"'
 
 # Python
 alias p='python'

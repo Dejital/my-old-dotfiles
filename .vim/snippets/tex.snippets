@@ -1,0 +1,148 @@
+#
+# Additions
+#
+#
+# Environments
+#
+# Alternative enumerate, etc.
+snippet enum*
+	\begin{enumerate*}
+		\item ${1}
+	\end{enumerate*}
+snippet item*
+	\begin{itemize*}
+		\item ${1}
+	\end{itemize*}
+snippet desc*
+	\begin{description*}
+		\item[${1}] ${2}
+	\end{description*}
+snippet sol
+	\begin{solution}
+		${1}
+	\end{solution}
+# 
+# Citations
+snippet cpp
+	\citep[${1:pp}]{${2:key}}${3}
+snippet cp
+	\citep{${1}}${2}
+snippet ctt
+	\citet[${1:pp}]{${2:key}}${3}
+snippet ct
+	\citet{${1}}${2}
+#
+# 
+# footnote
+snippet fn
+	%
+	% footnote {{{
+	\footnote{${1}}  %
+	% }}}
+	${2}
+#
+# italic
+snippet em
+	\emph{${1}} ${2}
+# bold
+snippet bf
+	\textbf{${1}} ${2}
+#
+# Newthought
+snippet nt
+	\newthought{${1}}${2}
+#
+# Times
+snippet t
+	$t_${1}$ ${2}
+#
+# Argument conclusion
+snippet itf
+	\item[$\therefore$] ${1}
+#
+# Therefore
+snippet tf
+	\therefore${1}
+#
+#-----------------#
+# Beamer Snippets #
+#-----------------#
+# I think I almost always want to center text. So that is default.
+snippet fr
+	\begin{frame} \frametitle{${1: Frame title}} %{{{
+		\begin{center}
+
+		${2}
+
+		\end{center}
+	\end{frame}
+	%}}}
+# A frame that doesn't center:
+snippet fr*
+	\begin{frame} \frametitle{${1: Frame title}} %{{{
+
+		${2}
+
+	\end{frame}
+	%}}}
+# A frame without a title
+snippet frnt
+	\begin{frame}%{{{
+		${2}
+	\end{frame}
+	%}}}
+#
+#---------------------------#
+# Templates (Yes I'm lazy!) #
+#---------------------------#
+# My generic essay template
+snippet essay
+	\documentclass[12pt]{article}
+	\usepackage[utf8]{inputenc}
+	\usepackage{setspace}
+	\frenchspacing
+	\doublespacing
+
+	\begin{document}
+
+	\title{${1}}
+	\author{Sergey Kutserubov}
+	\date{${2}}
+	\maketitle
+
+	${3}
+
+	\end{document}
+# Cornell notes template
+snippet notes
+	% Preamble {{{
+	\documentclass[12pt]{article}
+	\usepackage[utf8]{inputenc}
+	\usepackage[lmargin=5cm,rmargin=3cm,tmargin=3cm,bmargin=3cm,marginpar=3cm,reversemp]{geometry}
+	\usepackage{setspace}
+	\usepackage{pifont}
+	\frenchspacing
+	\doublespacing
+	% Preamble }}}
+	% margin command {{{
+	\newcommand\margin[1]{
+		\marginpar{\raggedleft \sffamily \textbf{#1} } }
+	% margin command }}}
+	% summary command {{{
+	\newcommand\summary[1]{
+		\bigskip \centerline{\ding{83} \ding{83} \ding{83}} \bigskip
+		\hspace{0pt} \marginpar{\raggedleft% 
+			\sffamily \scshape \large \ding{51} Summary: }
+		{#1} }
+	% summary command }}}
+
+	\begin{document}
+	\title{${1}}
+	\author{Sergey Kutserubov}
+	\date{}
+	\maketitle
+
+	${2}
+
+	\end{document}
+			
