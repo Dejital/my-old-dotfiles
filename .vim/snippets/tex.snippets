@@ -97,11 +97,13 @@ snippet frnt
 #---------------------------#
 # My generic essay template
 snippet essay
+	% Preamble {{{
 	\documentclass[12pt]{article}
 	\usepackage[utf8]{inputenc}
 	\usepackage{setspace}
 	\frenchspacing
 	\doublespacing
+	% Preamble }}}
 
 	\begin{document}
 
@@ -126,7 +128,7 @@ snippet notes
 	% Preamble }}}
 	% margin command {{{
 	\newcommand\margin[1]{
-		\marginpar{\raggedleft \sffamily \textbf{#1} } }
+		\hspace{0pt} \marginpar{\raggedleft \sffamily \textbf{#1} } }
 	% margin command }}}
 	% summary command {{{
 	\newcommand\summary[1]{

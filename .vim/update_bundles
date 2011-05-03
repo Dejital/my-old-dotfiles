@@ -14,6 +14,9 @@ git_bundles = [
 #  "git://github.com/vim-scripts/AutomaticTexPlugin.git",
   "git://github.com/olivierverdier/vim-latex-box.git",
 #  "git://github.com/jcf/vim-latex.git",
+  "git://github.com/jceb/vim-orgmode.git",
+  "git://github.com/vim-scripts/utl.vim.git",
+  "git://github.com/chrisbra/NrrwRgn.git",
 ]
 
 vim_org_scripts = [

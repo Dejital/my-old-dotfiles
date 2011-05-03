@@ -10,7 +10,7 @@ alias vf='mvim -f'
 alias l='ls -G'
 alias ll='ls -aG'
 alias ..='cd ..'
-alias ...='cd ...'
+alias ...='cd ../..'
 alias school='cd ~/Documents/School'
 
 # Latex
@@ -38,4 +38,6 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 alias gh='git hist'
 
-
+# Miscellaneous
+#alias mame='/Volumes/Sebastian/Games/\*Emulation/MAME/mame64'
+alias mame='/Applications/Games/MAME/mame64'
