@@ -6,6 +6,9 @@
 alias v='mvim'
 alias vf='mvim -f'
 
+# Emacs
+alias e='emacs'
+
 # Terminal
 alias l='ls -G'
 alias ll='ls -aG'

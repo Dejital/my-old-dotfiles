@@ -1,7 +1,30 @@
-  ;; Most of this is from
+  ;; Interface stuff {{{
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 240 :width normal :foundry "apple" :family "Menlo")))))
+  ;; Interface stuff }}}
+
+  ;; Fixing "cannot open load file" errors {{{
+  ;; I got this 'fix' from:
+  ;; http://desk.stinkpot.org:8080
+;;(add-to-list ‘load-path “/Applications/Emacs.app/Contents/Resources/lisp”)
+  ;; }}}
+
+  ;; org-mode {{{
+  ;; Most of the following is from:
   ;; http://newartisans.com/2007/08/using-org-mode-as-a-day-planner
 
-(require 'org-install)
+  ;; This line should not be necessary since org-mode is preinstalled
+;;(require 'org-install)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -26,6 +49,15 @@
      (define-key org-todo-state-map "w"
        #'(lambda nil (interactive) (org-todo "WAITING")))
 
+;;     (define-key org-agenda-mode-map "\C-n" 'next-line)
+;;     (define-key org-agenda-keymap "\C-n" 'next-line)
+;;     (define-key org-agenda-mode-map "\C-p" 'previous-line)
+;;     (define-key org-agenda-keymap "\C-p" 'previous-line)
+  ))
+
+
+(eval-after-load "org-agenda"
+  '(progn
      (define-key org-agenda-mode-map "\C-n" 'next-line)
      (define-key org-agenda-keymap "\C-n" 'next-line)
      (define-key org-agenda-mode-map "\C-p" 'previous-line)
@@ -72,15 +104,6 @@
  '(remember-annotation-functions (quote (org-remember-annotation)))
  '(remember-handler-functions (quote (org-remember-handler))))
 
-
-
- ;; The following lines are always needed.  Choose your own keys.
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-
   ;; Org-mode latex support
 (require 'org-latex)
 (unless (boundp 'org-export-latex-classes)
@@ -90,17 +113,4 @@
                "\\documentclass{article}"
                ("\\section{%s}" . "\\section*{%s}")))  
 (setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
-
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 240 :width normal :foundry "apple" :family "Menlo")))))
+  ;; org-mode }}}
