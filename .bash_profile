@@ -25,6 +25,7 @@ alias p='python'
 alias p3='python3'
 
 # Git
+alias gp='git push origin master'
 alias gs='git status '
 alias ga='git add '
 alias gl='git log --oneline'
@@ -39,5 +40,7 @@ alias gx='gitx --all'
 alias gh='git hist'
 
 # Miscellaneous
-#alias mame='/Volumes/Sebastian/Games/\*Emulation/MAME/mame64'
-alias mame='/Applications/Games/MAME/mame64'
+alias mame='/Volumes/Sebastian/Games/\*Emulation/MAME/mame64'
+#alias mame='/Applications/Games/MAME/mame64'
+alias calibrelibrary='calibre --with-library=/Volumes/Sebastian/Calibre\ Library'
+

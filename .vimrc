@@ -183,6 +183,11 @@ endfunction
 nmap <leader>s :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
+
+"-----------------------------------------------------------------------------
+" Compiling code
+"-----------------------------------------------------------------------------
+
 " Compile Python with \p2 or \p3
 nmap <buffer> <leader>p2 :w<CR>:!/usr/bin/env python % <CR>
 nmap <buffer> <leader>p3 :w<CR>:!/usr/bin/env python3 % <CR>
