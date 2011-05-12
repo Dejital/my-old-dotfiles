@@ -13,6 +13,9 @@
  '(default ((t (:inherit nil :stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 240 :width normal :foundry "apple" :family "Menlo")))))
   ;; Interface stuff }}}
 
+(defconst emacs-lisp-root "~/Library/Emacs")
+(setq load-path (cons emacs-lisp-root load-path))
+
   ;; Disabling backup
 (setq make-backup-files nil) ;; do not make backup files 
 
@@ -27,7 +30,7 @@
   ;; http://newartisans.com/2007/08/using-org-mode-as-a-day-planner
 
   ;; This line should not be necessary since org-mode is preinstalled
-;;(require 'org-install)
+(require 'org-install)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
