@@ -61,7 +61,10 @@
      (define-key org-agenda-mode-map "\C-n" 'next-line)
      (define-key org-agenda-keymap "\C-n" 'next-line)
      (define-key org-agenda-mode-map "\C-p" 'previous-line)
-     (define-key org-agenda-keymap "\C-p" 'previous-line)))
+     (define-key org-agenda-keymap "\C-p" 'previous-line)
+     ;; Use C-c C-w to refile
+     (setq org-refile-targets '((org-agenda-files . (:maxlevel . 5))))
+  ))
 
 (require 'remember)
 
@@ -70,8 +73,8 @@
 (define-key global-map [(control meta ?r)] 'remember)
 
 (custom-set-variables
- '(org-agenda-files (quote ("~/Agenda/todo.org")))
- '(org-default-notes-file "~/Agenda/notes.org")
+ '(org-agenda-files (quote ("~/Dropbox/todo.org")))
+ '(org-default-notes-file "~/Dropbox/todo.org")
  '(org-agenda-ndays 7)
  '(org-deadline-warning-days 14)
  '(org-agenda-show-all-dates t)
@@ -99,8 +102,7 @@
          (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
  '(org-remember-store-without-prompt t)
  '(org-remember-templates
-   (quote ((116 "* TODO %?\n  %u" "~/todo.org" "Tasks")
-       (110 "* %u %?" "~/Agenda/notes.org" "Notes"))))
+   (quote ((116 "* TODO %?\n  %u" "~/Dropbox/todo.org" "Tasks"))))
  '(remember-annotation-functions (quote (org-remember-annotation)))
  '(remember-handler-functions (quote (org-remember-handler))))
 
