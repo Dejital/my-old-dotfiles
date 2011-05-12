@@ -13,6 +13,9 @@
  '(default ((t (:inherit nil :stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 240 :width normal :foundry "apple" :family "Menlo")))))
   ;; Interface stuff }}}
 
+  ;; Disabling backup
+(setq make-backup-files nil) ;; do not make backup files 
+
   ;; Fixing "cannot open load file" errors {{{
   ;; I got this 'fix' from:
   ;; http://desk.stinkpot.org:8080
